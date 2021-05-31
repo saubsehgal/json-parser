@@ -1,0 +1,24 @@
+{
+    "price" : 3.14,
+    "ingredients" : [
+        {
+            "naturalIngredients" : [
+                {
+                    "name" : "rice syrup"
+                },
+                {
+                    "name" : "honey"
+                }
+            ],
+            "artificialIngredients" : [
+                {
+                    "name" : "food color"
+                },
+                {
+                    "name" : "Monosodium Glutamate"
+                }
+            ]
+        }
+
+    ]
+}

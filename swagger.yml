@@ -1,0 +1,101 @@
+---
+openapi: 3.0.0
+info:
+  title: Candy Object Parsing
+  description: This api accepts an candy objet request. A candy object has a price and is made up of ingredients that includes natural and artificial ingredients.
+  version: 0.0.1
+servers:
+- url: /
+tags:
+- name: Candy Object
+  description: object containing candy price and ingredients.
+paths:
+  /v1/candy:
+    post:
+      description: This endpoint accepts a candy object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandyRequest'
+      responses:
+        '200':
+          description: Success Response.
+
+        "400":
+          description: Bad request. Request is malformed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    CandyRequest:
+      type: object
+      properties:
+        price:
+          type: number
+          example: 2.00
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredients'
+    Ingredients:
+      properties:
+        naturalIngredients:
+         type: array
+         items:
+          $ref: '#/components/schemas/NaturalIngredient'
+        artificalIngredients:
+         type: array
+         items:
+          $ref: '#/components/schemas/ArtificialIngredient'
+    NaturalIngredient:
+      properties:
+        name:
+          type: string
+          example: honey
+    ArtificialIngredient:
+      properties:
+        name:
+          type: string
+          example: food color
+
+    ErrorResponse:
+      type: object
+      properties:
+        ref:
+          type: string
+          description: A unique reference for the error (UUID). Used to correlate the exact error message received by the client with an exact instance of a log message to ease and improve observability.
+          example: 123e4567-e89b-12d3-a456-426614174000
+        status:
+          type: integer
+          description: HTTP response status code.e
+          example: 400
+        code:
+          type: string
+          example: Machine-readable error code to be used by clients error handling logic.
+        message:
+          type: string
+          example: Human readable description relating to the specific instance of the error at hand. Complements the code with a friendly description of the exact error.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              field:
+                type: string
+              message:
+                type: string
+              params:
+                type: object
+                additionalProperties:
+                  type: string
+      required:
+        - ref
+        - status
+        - code
+        - message

@@ -1,0 +1,9 @@
+venv
+.eggs
+build/
+_build/
+*.egg-info
+*.so
+.pytest_cache
+.coverage
+.benchmarks
