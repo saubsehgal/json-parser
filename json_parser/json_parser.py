@@ -154,7 +154,7 @@ class FromJson:
         Construct object from dict
         Args:
             d (Dict[str, JSONPrimitive]): json dict
-            decoder (StrongJson): decoder
+            decoder (InterfaceDecoder): decoder
 
         Returns:
             Object of this class.
@@ -167,7 +167,7 @@ class FromJson:
 
         Args:
             s (str): json str
-            decoder (StrongJson):
+            decoder (InterfaceDecoder):
             **kwd (): the rest of keyword arguments are passed down to json.loads
 
         Returns:
